@@ -6,7 +6,7 @@ import './App.css'
 class App extends React.Component {
 
 
-  state = { jokeContent: " " }
+  state = { jokeContent: " " , status : ""}
 
   componentDidMount() {
     this.fetchAdvice();
@@ -17,9 +17,9 @@ class App extends React.Component {
       .then((response) => {
 
         const { jokeContent } = response.data;
-
-        console.log(response.data.jokeContent);
-        this.setState({ jokeContent })
+        const { status } = response.data;
+       console.log(response.data);
+        this.setState({ jokeContent , status})
       })
       .catch((error) => {
         console.log(error);
@@ -28,11 +28,13 @@ class App extends React.Component {
 
   render() {
    
-    const { jokeContent } = this.state;
+    const { jokeContent, } = this.state;
+    const { status } = this.state;
     return (
        <div className="app">
         <div className="card">
           <h1 className="heading">{jokeContent}</h1>
+          <h1 className='heading'>{status}</h1>
           <button className='button' onClick={this.fetchAdvice}>
             <span>click here!</span>
           </button>
